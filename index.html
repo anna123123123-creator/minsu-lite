@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>民宿短租管理系统（精简开源版）</title>
+<meta name="description" content="免费开源的民宿短租管理系统精简版：房源浏览、在线预订、可用日期查询、后台房源与订单管理，真实增删改查功能，纯前端+localStorage实现，可作为学习或二次开发起点。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">民宿<span class="accent">精选</span></div>
+    <a href="admin.html" class="nav-link">进入房东后台 →</a>
+  </header>
+
+  <main class="container">
+    <div class="page-head">
+      <h1>找一个想住的地方</h1>
+      <p>点击房源查看详情和已被预订的日期区间，选好日期直接在线提交预订申请。这是一个真实可用的精简开源系统，数据保存在你浏览器本地。</p>
+    </div>
+    <div id="propGrid" class="prop-grid"></div>
+  </main>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
+      <button class="modal-close" id="btnCloseModal">&times;</button>
+      <h2 id="modalPropName"></h2>
+      <p class="sub" id="modalPropLoc"></p>
+      <div class="booked-ranges" id="bookedRanges"></div>
+      <div id="modalMsg"></div>
+      <form id="bookingForm" novalidate>
+        <div class="field">
+          <label>姓名</label>
+          <input id="guestNameInput" type="text" required placeholder="用于联系你的姓名">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>入住日期</label>
+            <input id="checkInInput" type="date" required>
+          </div>
+          <div class="field">
+            <label>离店日期</label>
+            <input id="checkOutInput" type="date" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>入住人数</label>
+          <input id="guestsInput" type="number" min="1" value="1" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">提交预订申请</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

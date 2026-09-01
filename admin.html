@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>房东后台 · 民宿短租管理系统（精简开源版）</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <div class="brand">民宿<span class="accent">精选</span> 后台</div>
+      <div class="side-link active" data-view="dashboard">仪表盘</div>
+      <div class="side-link" data-view="properties">房源管理</div>
+      <div class="side-link" data-view="bookings">订单管理</div>
+      <div class="side-link" id="btnResetData" style="margin-top:20px;color:var(--red)">重置示例数据</div>
+      <a href="index.html" class="side-link">← 返回前台</a>
+    </aside>
+
+    <main class="admin-main">
+      <section id="view-dashboard" class="admin-view active">
+        <div class="page-head"><h1>仪表盘</h1><p>房源与订单概览。</p></div>
+        <div class="stat-grid" id="statGrid"></div>
+        <table>
+          <thead><tr><th>最新订单</th><th>房源</th><th>入住日期</th><th>状态</th></tr></thead>
+          <tbody id="recentBookingsBody"></tbody>
+        </table>
+      </section>
+
+      <section id="view-properties" class="admin-view">
+        <div class="page-head"><h1>房源管理</h1><p>添加、编辑或下架房源。</p></div>
+        <div class="table-toolbar">
+          <span></span>
+          <button class="btn btn-primary btn-sm" id="btnAddProperty">+ 新增房源</button>
+        </div>
+        <table>
+          <thead><tr><th>房源名称</th><th>位置</th><th>价格/晚</th><th>容纳人数</th><th>操作</th></tr></thead>
+          <tbody id="propertiesBody"></tbody>
+        </table>
+      </section>
+
+      <section id="view-bookings" class="admin-view">
+        <div class="page-head"><h1>订单管理</h1><p>确认或取消预订申请。</p></div>
+        <div class="table-toolbar">
+          <div class="filter-row" id="bookingFilters">
+            <button class="filter-btn active" data-status="all">全部</button>
+            <button class="filter-btn" data-status="pending">待确认</button>
+            <button class="filter-btn" data-status="confirmed">已确认</button>
+            <button class="filter-btn" data-status="cancelled">已取消</button>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>房源</th><th>客人</th><th>入住</th><th>离店</th><th>人数</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody id="bookingsBody"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="propModalBackdrop">
+    <div class="modal">
+      <button class="modal-close" id="btnClosePropModal">&times;</button>
+      <h2 id="propModalTitle">新增房源</h2>
+      <div id="propModalMsg"></div>
+      <form id="propertyForm" novalidate>
+        <input type="hidden" id="propIdInput">
+        <div class="field"><label>房源名称</label><input id="propNameInput" type="text" required></div>
+        <div class="field"><label>位置</label><input id="propLocationInput" type="text" required></div>
+        <div class="field-row">
+          <div class="field"><label>价格/晚（元）</label><input id="propPriceInput" type="number" min="0" required></div>
+          <div class="field"><label>最大容纳人数</label><input id="propCapacityInput" type="number" min="1" required></div>
+        </div>
+        <div class="field"><label>简介</label><textarea id="propDescInput" rows="3"></textarea></div>
+        <button type="submit" class="btn btn-primary btn-block">保存</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
